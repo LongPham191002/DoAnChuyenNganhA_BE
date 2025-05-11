@@ -5,10 +5,11 @@ import {
   Body,
   Param,
   Put,
-  Delete,
+  Delete, UseGuards,
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from './entities/user.entity';
+import {JwtAuthGuard} from "../auth/auth.guard";
 
 @Controller('users')
 export class UserController {
@@ -17,6 +18,14 @@ export class UserController {
   @Post()
   create(@Body() user: Partial<User>) {
     return this.userService.create(user);
+  }
+
+
+  @UseGuards(JwtAuthGuard)  // Bảo vệ endpoint bằng JwtAuthGuard
+  @Get(':id')
+  async getProfile(@Param('id') id: number) {
+    // Lấy thông tin người dùng từ service
+    return this.userService.findOne(id);
   }
 
   @Get()

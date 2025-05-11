@@ -6,7 +6,7 @@ export enum UserRole {
   Customer = 'Customer',
 }
 
-@Entity()
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,9 +30,13 @@ export class User {
   datetime: Date;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.Customer })
-  role: UserRole;
+  role: UserRole = UserRole.Customer;
 
   // Add this line to define the inverse relationship with orders
   @OneToMany(() => Order, (order) => order.User)
   orders: Order[];
+
+  // Nếu bạn dùng xác thực đăng nhập, thêm password:
+  @Column({ name: 'Password', nullable: true })
+  password: string;
 }

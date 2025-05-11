@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Put, Delete, Patch} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
+import {UpdateProductDto} from "./dto/update-product.dto";
 @Controller('products')
 export class ProductController {
     constructor(private readonly productService: ProductService) {}
@@ -29,4 +30,5 @@ export class ProductController {
     remove(@Param('id') id: number) {
         return this.productService.remove(id);
     }
+
 }
