@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, UpdateDateColumn} from 'typeorm';
 import {Category} from "../../category/entities/category.entity";
 import {CartItem} from "../../cart-item/entities/cart-item.entity";
 
@@ -31,6 +31,7 @@ export class Product {
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     price: number;
 
+
     @Column({ name: 'category_id', nullable: true })
     category_id: number;
 
@@ -40,4 +41,7 @@ export class Product {
 
     @OneToMany(() => CartItem, (cartItem) => cartItem.order)
     cartItems: CartItem[];
+
+    @UpdateDateColumn({ name: 'update_date', type: 'timestamp', nullable: true })
+    update_date: Date;
 }

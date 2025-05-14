@@ -59,9 +59,10 @@ export class AuthService {
             console.error('Invalid credentials for email:', createAuthDto.email); // Log khi không tìm thấy người dùng
             throw new UnauthorizedException('Invalid credentials');
         }
-        const payload = { email: user.email, sub: user.id };
+        const payload = { email: user.email, sub: user.id, role: user.role };
         return {
             access_token: this.jwtService.sign(payload),
+            user,
         };
 
     }

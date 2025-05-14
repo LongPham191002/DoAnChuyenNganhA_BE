@@ -32,11 +32,11 @@ export class UserController {
   findAll() {
     return this.userService.findAll();
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.userService.findOne(id);
-  }
+  //
+  // @Get(':id')
+  // findOne(@Param('id') id: number) {
+  //   return this.userService.findOne(id);
+  // }
 
   @Put(':id')
   update(@Param('id') id: number, @Body() user: Partial<User>) {

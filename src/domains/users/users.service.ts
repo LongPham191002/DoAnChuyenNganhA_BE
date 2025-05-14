@@ -25,7 +25,7 @@ export class UserService {
   async findOne(id: number): Promise<User | null> {
     return this.userRepository.findOne({
       where: { id },
-      select: ['id', 'name', 'email', 'phone', 'address', 'image_url'], // Chỉ trả về những trường cần thiết
+      select: ['id', 'name', 'email', 'phone', 'address', 'image_url','role'], // Chỉ trả về những trường cần thiết
     });
   }
 
